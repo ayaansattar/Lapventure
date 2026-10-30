@@ -16,14 +16,14 @@ public class TeamStats : MonoBehaviour
 
     void Recalculate()
     {
-        float speed = baseSpeed;
+        float bonus = 0f;
         double income = baseIncome;
         foreach (var d in departments)
         {
-            speed *= d.SpeedMultiplier;
+            bonus += d.SpeedMultiplier - 1f;
             income += d.IncomeBonus;
         }
-        kart.speed = speed;
+        kart.speed = baseSpeed * (1f + bonus);
         payout.moneyPerLap = income;
     }
 }
