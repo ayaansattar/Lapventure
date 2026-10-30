@@ -7,6 +7,8 @@ public class KartMover : MonoBehaviour
     public float speed = 2f;          // units per second
     public int laps;
     public float distance;
+    public float speedMultiplier = 1f;
+    public bool paused;
     float length;
     public event System.Action OnLapCompleted;
 
@@ -14,7 +16,9 @@ public class KartMover : MonoBehaviour
 
     void Update()
     {
-        distance += speed * Time.deltaTime;
+        if (paused) return;
+        distance += speed * speedMultiplier * Time.deltaTime;
+
         if (distance >= length)
         {
             distance -= length;
