@@ -20,7 +20,6 @@ public class KartMover : MonoBehaviour
             distance -= length;
             laps++;
             OnLapCompleted?.Invoke();
-            Debug.Log("Lap " + laps);
         }
         float t = distance / length;
         transform.position = (Vector3)track.EvaluatePosition(t);
