@@ -16,7 +16,7 @@ public class CollectButton : MonoBehaviour
     void Start()
     {
         payout.OnUncollectedChanged += Refresh;
-        Refresh(0);
+        Refresh(payout.Uncollected);
     }
 
     void Update()

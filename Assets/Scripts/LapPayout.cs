@@ -5,7 +5,7 @@ public class LapPayout : MonoBehaviour
 {
     public double moneyPerLap = 5;
     public bool autoCollect;
-    public double Uncollected { get; private set; }
+    public double Uncollected { get; set; }
     public event System.Action<double> OnUncollectedChanged;
 
     void Start() => GetComponent<KartMover>().OnLapCompleted += Pay;

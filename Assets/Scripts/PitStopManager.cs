@@ -21,7 +21,7 @@ public class PitStopManager : MonoBehaviour
     public float boxAt = 30f;       // BOX BOX button appears at or below this
     public float autoPitAt = 20f;   // Pit Crew pits automatically at or below this
 
-    float tires = 100f;
+    [HideInInspector] public float tires = 100f; 
     float boostTimer;
     bool pitting;
 

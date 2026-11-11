@@ -13,6 +13,7 @@ public class CrewManager : MonoBehaviour
 
     void Start()
     {
+        if (payout.autoCollect) collectButton.SetActive(false);
         CurrencyManager.Instance.OnMoneyChanged += _ => Refresh();
         Refresh();
     }

@@ -9,6 +9,7 @@ public class ChampionshipManager : MonoBehaviour
     public Slider progressBar;
     public TMP_Text goalLabel;
     public GameObject winPanel;
+    public SaveManager saveManager;
 
     float length;
     float leadStart = -1f;
@@ -56,5 +57,13 @@ public class ChampionshipManager : MonoBehaviour
     {
         winPanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void RestartChampionship()
+    {
+        saveManager.DeleteSave();
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 }
