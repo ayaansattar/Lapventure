@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca3e682f5c91b52478a76a6ea453c548, type: 3}
   m_Name: Engine
   m_EditorClassIdentifier: Assembly-CSharp::DepartmentConfig
-  displayName: 
+  displayName: Engine
   baseCost: 10
   costGrowth: 1.15
-  speedPerLevel: 0.05
+  speedPerLevel: 0.08
   incomePerLevel: 0
   milestones: 0a0000001900000032000000i
   milestoneMultiplier: 2
