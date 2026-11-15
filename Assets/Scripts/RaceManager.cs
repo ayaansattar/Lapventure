@@ -9,6 +9,7 @@ public class RaceManager : MonoBehaviour
     public TMP_Text positionLabel;
     public TMP_Text leaderboardLabel;
     public int Position { get; private set; }
+    public float[] leadCaps = { 0.2f, 0.6f, 1.4f, 1.8f };   // max lead per rival, slowest first
     float length;
 
 
@@ -32,5 +33,16 @@ public class RaceManager : MonoBehaviour
             sb.AppendLine($"P{pos++}  {name}  Lap {k.laps + 1}");
         }
         leaderboardLabel.text = sb.ToString();
+
+        for (int i = 0; i < rivals.Length; i++)
+        {
+            var r = rivals[i];
+            float cap = leadCaps[Mathf.Min(i, leadCaps.Length - 1)]; 
+            float lead = Progress(r) - p;
+            float playerSpeed = player.speed * player.speedMultiplier;
+            r.speedMultiplier = lead > cap * length
+                ? Mathf.Min(1f, 0.95f * playerSpeed / r.speed)
+                : 1f;
+        }
     }
 }

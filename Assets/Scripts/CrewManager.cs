@@ -10,6 +10,9 @@ public class CrewManager : MonoBehaviour
     public Button engineerButton, pitCrewButton;
     public TMP_Text engineerLabel, pitCrewLabel;
     public double engineerCost = 300, pitCrewCost = 1500;
+    public double mechanicBaseCost = 600, mechanicCostGrowth = 1.8;
+    public int maxCrew = 6;
+    double MechanicCost => mechanicBaseCost * System.Math.Pow(mechanicCostGrowth, pitStop.crewSize - 1);
 
     void Start()
     {
@@ -29,8 +32,16 @@ public class CrewManager : MonoBehaviour
 
     public void HirePitCrew()
     {
-        if (pitStop.autoPit || !CurrencyManager.Instance.TrySpend(pitCrewCost)) return;
-        pitStop.autoPit = true;
+        if (!pitStop.autoPit)
+        {
+            if (!CurrencyManager.Instance.TrySpend(pitCrewCost)) return;
+            pitStop.autoPit = true;
+        }
+        else
+        {
+            if (pitStop.crewSize >= maxCrew || !CurrencyManager.Instance.TrySpend(MechanicCost)) return;
+            pitStop.crewSize++;
+        }
         Refresh();
     }
 
@@ -40,8 +51,20 @@ public class CrewManager : MonoBehaviour
         engineerLabel.text = payout.autoCollect ? "Race Engineer\n(Hired)"
             : $"Race Engineer\n${NumberFormat.Format(engineerCost)}";
         engineerButton.interactable = !payout.autoCollect && money >= engineerCost;
-        pitCrewLabel.text = pitStop.autoPit ? "Pit Crew\n(Hired)"
-            : $"Pit Crew\n${NumberFormat.Format(pitCrewCost)}";
-        pitCrewButton.interactable = !pitStop.autoPit && money >= pitCrewCost;
+        if (!pitStop.autoPit)
+        {
+            pitCrewLabel.text = $"Pit Crew\n${NumberFormat.Format(pitCrewCost)}";
+            pitCrewButton.interactable = money >= pitCrewCost;
+        }
+        else if (pitStop.crewSize >= maxCrew)
+        {
+            pitCrewLabel.text = $"Pit Crew x{pitStop.crewSize}\n(Max)";
+            pitCrewButton.interactable = false;
+        }
+        else
+        {
+            pitCrewLabel.text = $"Pit Crew x{pitStop.crewSize}\n+1 ${NumberFormat.Format(MechanicCost)}";
+            pitCrewButton.interactable = money >= MechanicCost;
+        }
     }
 }

@@ -15,6 +15,7 @@ public class SaveManager : MonoBehaviour
     public TMP_Text offlineLabel;
     public float autosaveInterval = 30f;
     public float maxOfflineHours = 2f;
+    public float noCrewOfflineRate = 0.4f;
 
     string SavePath => Path.Combine(Application.persistentDataPath, "save.json");
     float timer;
@@ -53,7 +54,8 @@ public class SaveManager : MonoBehaviour
             tires = pitStop.tires,
             kartLaps = Array.ConvertAll(karts, k => k.laps),
             kartDistances = Array.ConvertAll(karts, k => k.distance),
-            lastSaveTicks = DateTime.UtcNow.Ticks
+            lastSaveTicks = DateTime.UtcNow.Ticks,
+            crewSize = pitStop.crewSize
         };
         File.WriteAllText(SavePath, JsonUtility.ToJson(d));
     }
@@ -69,6 +71,7 @@ public class SaveManager : MonoBehaviour
         payout.autoCollect = d.engineerHired;
         pitStop.autoPit = d.pitCrewHired;
         pitStop.tires = d.tires;
+        pitStop.crewSize = Mathf.Max(1, d.crewSize);
         for (int i = 0; i < karts.Length && i < d.kartLaps.Length; i++)
         {
             karts[i].laps = d.kartLaps[i];
@@ -86,8 +89,10 @@ public class SaveManager : MonoBehaviour
         if (seconds < 60) yield break;
         float length = karts[0].track.CalculateLength();
         double perSecond = payout.moneyPerLap * karts[0].speed / length;
-        pendingOffline = perSecond * seconds;
-        offlineLabel.text = $"While you were away, your team earned\n${NumberFormat.Format(pendingOffline)}";
+        double rate = pitStop.autoPit ? 1.0 : noCrewOfflineRate;
+        pendingOffline = perSecond * seconds * rate;
+        offlineLabel.text = $"While you were away, your team earned\n${NumberFormat.Format(pendingOffline)}"
+            + (pitStop.autoPit ? "" : "\n\nHire a Pit Crew to earn full income while away!");
         offlinePanel.SetActive(true);
     }
 

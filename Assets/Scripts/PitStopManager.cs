@@ -20,6 +20,10 @@ public class PitStopManager : MonoBehaviour
     public float boostMultiplier = 1.3f, boostDuration = 10f;
     public float boxAt = 30f;       // BOX BOX button appears at or below this
     public float autoPitAt = 20f;   // Pit Crew pits automatically at or below this
+    public int crewSize = 1;
+    public float baseStopTime = 2f;
+    public float perfectStopTime = 0.5f;
+    float StopTime => baseStopTime / (1f + 0.5f * (crewSize - 1));
 
     [HideInInspector] public float tires = 100f; 
     float boostTimer;
@@ -44,7 +48,7 @@ public class PitStopManager : MonoBehaviour
         if (boostTimer > 0) mult *= boostMultiplier;
         kart.speedMultiplier = mult;
 
-        boxButton.gameObject.SetActive(tires <= boxAt); 
+        boxButton.interactable = tires <= boxAt;
         tireLabel.text = $"Tires {tires:0}%" + (boostTimer > 0 ? "  BOOST!" : "");
     }
 
@@ -52,7 +56,7 @@ public class PitStopManager : MonoBehaviour
     {
         pitting = true;
         kart.paused = true;
-        boxButton.gameObject.SetActive(false);
+        boxButton.interactable = false; 
         timingPanel.SetActive(true);
     }
 
@@ -60,14 +64,14 @@ public class PitStopManager : MonoBehaviour
     {
         pitting = true;
         kart.paused = true;
-        boxButton.gameObject.SetActive(false);
-        StartCoroutine(FinishPit(1.5f, false));
+        boxButton.interactable = false;
+        StartCoroutine(FinishPit(StopTime, false));
     }
     public void StopMarker()
     {
         float v = timingBar.value;
         bool perfect = v >= greenMin && v <= greenMax;
-        StartCoroutine(FinishPit(perfect ? 0.5f : 2f, perfect));
+        StartCoroutine(FinishPit(perfect ? perfectStopTime : StopTime, perfect));
     }
 
     IEnumerator FinishPit(float delay, bool perfect)

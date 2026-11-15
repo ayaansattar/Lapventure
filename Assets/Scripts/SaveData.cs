@@ -10,4 +10,5 @@ public class SaveData
     public int[] kartLaps;
     public float[] kartDistances;
     public long lastSaveTicks;
+    public int crewSize;
 }
