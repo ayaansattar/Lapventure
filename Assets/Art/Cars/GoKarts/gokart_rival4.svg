@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="224" viewBox="0 0 160 224">
+  <!-- floor pan -->
+  <rect x="44" y="40" width="72" height="150" rx="10" fill="#6b6b6b" stroke="#111" stroke-width="2"/>
+  <!-- tube chassis rails and axles -->
+  <g stroke="#9a9a9a" stroke-width="5" stroke-linecap="round" fill="none">
+    <path d="M50 36 L44 190"/><path d="M110 36 L116 190"/>
+    <path d="M24 52 L136 52"/>
+  </g>
+  <rect x="14" y="174" width="132" height="8" rx="4" fill="#555" stroke="#111" stroke-width="1.5"/>
+  <!-- tires: small fronts, wider rears -->
+  <rect x="8" y="34" width="24" height="36" rx="7" fill="#1b1b1b" stroke="#000" stroke-width="2"/><rect x="11" y="39" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="11" y="46" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="11" y="53" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="11" y="60" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/>
+  <rect x="128" y="34" width="24" height="36" rx="7" fill="#1b1b1b" stroke="#000" stroke-width="2"/><rect x="131" y="39" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="131" y="46" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="131" y="53" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="131" y="60" width="18" height="2.5" rx="1.2" fill="#3a3a3a"/>
+  <rect x="2" y="156" width="32" height="44" rx="7" fill="#1b1b1b" stroke="#000" stroke-width="2"/><rect x="5" y="161" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="5" y="168" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="5" y="175" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="5" y="182" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="5" y="189" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/>
+  <rect x="126" y="156" width="32" height="44" rx="7" fill="#1b1b1b" stroke="#000" stroke-width="2"/><rect x="129" y="161" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="129" y="168" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="129" y="175" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="129" y="182" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/><rect x="129" y="189" width="26" height="2.5" rx="1.2" fill="#3a3a3a"/>
+  <!-- front bumper tube -->
+  <path d="M38 22 Q80 4 122 22" fill="none" stroke="#9a9a9a" stroke-width="6" stroke-linecap="round"/>
+  <!-- front fairing / nose panel with number -->
+  <path d="M46 14 Q80 2 114 14 L108 44 Q80 52 52 44 Z" fill="#FF7A1A" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M60 12 Q80 6 100 12 L98 20 Q80 15 62 20 Z" fill="#2B2B2B"/>
+  <rect x="68" y="22" width="24" height="18" rx="4" fill="#FFFFFF" stroke="#111" stroke-width="1.5"/>
+  <text x="80" y="36" font-family="DejaVu Sans, Arial, sans-serif" font-weight="bold" font-size="15" text-anchor="middle" fill="#111">5</text>
+  <!-- side pods (bodywork between front and rear wheels) -->
+  <path d="M10 82 Q6 118 12 150 L40 150 L42 82 Z" fill="#FF7A1A" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M150 82 Q154 118 148 150 L120 150 L118 82 Z" fill="#FF7A1A" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+  <rect x="16" y="100" width="20" height="8" rx="2" fill="#2B2B2B"/>
+  <rect x="124" y="100" width="20" height="8" rx="2" fill="#2B2B2B"/>
+  <!-- steering column + wheel -->
+  <rect x="78" y="48" width="4" height="34" fill="#444"/>
+  <rect x="62" y="80" width="36" height="7" rx="3.5" fill="#111"/>
+  <!-- seat -->
+  <path d="M58 104 Q80 94 98 104 L96 150 Q78 158 60 150 Z" fill="#222" stroke="#111" stroke-width="2"/>
+  <!-- driver: arms to wheel, shoulders, helmet -->
+  <path d="M60 118 L64 86" stroke="#B34A00" stroke-width="8" stroke-linecap="round"/>
+  <path d="M96 118 L94 86" stroke="#B34A00" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="78" cy="122" rx="22" ry="12" fill="#B34A00" stroke="#111" stroke-width="2"/>
+  <circle cx="78" cy="114" r="15" fill="#2B2B2B" stroke="#111" stroke-width="2.5"/>
+  <path d="M68 108 Q78 99 88 108 L86 112 Q78 106 70 112 Z" fill="#1A1A1A"/>
+  <path d="M76 100 L80 100 L80 128 L76 128 Z" fill="#FF7A1A" opacity="0.9"/>
+  <!-- side-mounted engine on the right of the seat, with exhaust -->
+  <rect x="100" y="138" width="22" height="28" rx="4" fill="#7a7a7a" stroke="#111" stroke-width="2"/>
+  <rect x="104" y="142" width="14" height="4" fill="#555"/><rect x="104" y="150" width="14" height="4" fill="#555"/>
+  <path d="M111 166 Q112 180 96 186" fill="none" stroke="#444" stroke-width="5" stroke-linecap="round"/>
+  <!-- fuel tank between driver's legs area / rear brake -->
+  <rect x="68" y="160" width="20" height="16" rx="4" fill="#2B2B2B" stroke="#111" stroke-width="1.5"/>
+  <!-- rear bumper (plastic) -->
+  <path d="M8 204 Q80 222 152 204 L152 214 Q80 232 8 214 Z" fill="#FF7A1A" stroke="#111" stroke-width="2.5" stroke-linejoin="round"/>
+</svg>

@@ -16,11 +16,11 @@ public class SaveManager : MonoBehaviour
     public float autosaveInterval = 30f;
     public float maxOfflineHours = 2f;
     public float noCrewOfflineRate = 0.4f;
-
     string SavePath => Path.Combine(Application.persistentDataPath, "save.json");
     float timer;
     double pendingOffline;
     long pausedAt;
+    public TeamUpgradesManager teamUpgrades;
 
     void Start()
     {
@@ -55,7 +55,8 @@ public class SaveManager : MonoBehaviour
             kartLaps = Array.ConvertAll(karts, k => k.laps),
             kartDistances = Array.ConvertAll(karts, k => k.distance),
             lastSaveTicks = DateTime.UtcNow.Ticks,
-            crewSize = pitStop.crewSize
+            crewSize = pitStop.crewSize,
+            teamUpgrades = teamUpgrades.GetPurchased()
         };
         File.WriteAllText(SavePath, JsonUtility.ToJson(d));
     }
@@ -78,6 +79,9 @@ public class SaveManager : MonoBehaviour
             karts[i].distance = d.kartDistances[i];
         }
         StartCoroutine(GrantOffline(d.lastSaveTicks));
+        
+        if (d.teamUpgrades != null) 
+            teamUpgrades.SetPurchased(d.teamUpgrades);
     }
 
     IEnumerator GrantOffline(long sinceTicks)

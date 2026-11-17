@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class ChampionshipManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class ChampionshipManager : MonoBehaviour
         if (won) return;
         int karts = race.rivals.Length + 1;
 
-        if (race.Position == 1)
+        if (race.Position == 1 && player.speed >= race.rivals.Max(r => r.speed))
         {
             if (leadStart < 0) leadStart = PlayerProgress;
             float held = Mathf.Clamp01((PlayerProgress - leadStart) / length);

@@ -11,12 +11,24 @@ public class RaceManager : MonoBehaviour
     public int Position { get; private set; }
     public float[] leadCaps = { 0.2f, 0.6f, 1.4f, 1.8f };   // max lead per rival, slowest first
     float length;
+    public Color[] rivalColors;
+    public KartMover[] Order { get; private set; }
+    public TeamStats stats;
+    public float[] rivalPerformance = { 0.3f, 0.55f, 0.8f, 0.995f };
 
-
-
-    void Start() => length = player.track.CalculateLength();
+    void Start()
+    {
+        length = player.track.CalculateLength();
+        for (int i = 0; i < rivals.Length && i < rivalPerformance.Length; i++)
+            rivals[i].speed = stats.SpeedAt(rivalPerformance[i]);
+    }
 
     float Progress(KartMover k) => k.laps * length + k.distance;
+    public int PositionOf(KartMover k)
+    {
+        float p = Progress(k);
+        return 1 + rivals.Append(player).Count(o => o != k && Progress(o) > p);
+    }
 
     void Update()
     {
@@ -24,13 +36,21 @@ public class RaceManager : MonoBehaviour
         Position = 1 + rivals.Count(r => Progress(r) > p);
         positionLabel.text = $"P{Position} / {rivals.Length + 1}   Lap {player.laps + 1}";
 
-        var order = rivals.Append(player).OrderByDescending(Progress);
+
+
+        var order = rivals.Append(player).OrderByDescending(Progress).ToArray();
+        Order = order; 
         var sb = new System.Text.StringBuilder();
         int pos = 1;
         foreach (var k in order)
         {
-            string name = k == player ? "<color=#FFD700><b>YOU</b></color>" : k.name;
-            sb.AppendLine($"P{pos++}  {name}  Lap {k.laps + 1}");
+            int idx = System.Array.IndexOf(rivals, k);
+            string name = k == player
+                ? "<color=#FFD700><b>YOU</b></color>"
+                : idx >= 0 && idx < rivalColors.Length
+                    ? $"<color=#{ColorUtility.ToHtmlStringRGB(rivalColors[idx])}>{k.name}</color>"
+                    : k.name; 
+            sb.AppendLine($"P{pos++}<pos=17%>{name}<pos=66%>Lap {k.laps + 1}");
         }
         leaderboardLabel.text = sb.ToString();
 

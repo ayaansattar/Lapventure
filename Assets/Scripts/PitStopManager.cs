@@ -6,28 +6,32 @@ using System.Collections;
 public class PitStopManager : MonoBehaviour
 {
     public KartMover kart;
+    public PitLane pitLane;              // the PitLane on PlayerKart
     public Button boxButton;
+    public TMP_Text boxLabel;            // optional: BOX BOX button's text
     public GameObject timingPanel;
     public Slider timingBar;
     public TMP_Text tireLabel;
-    public bool autoPit;
 
-    public float wearPerLap = 12f;
-    public float lowWear = 30f;          // below this, kart slows down
-    public float wornSpeed = 0.6f;       // 60% speed when worn
-    public float markerSpeed = 1.5f;     // how fast the marker slides
+    public float wearPerLap = 10f;
+    public float lowWear = 30f;
+    public float wornSpeed = 0.6f;
+    public float markerSpeed = 0.7f;
     public float greenMin = 0.4f, greenMax = 0.6f;
     public float boostMultiplier = 1.3f, boostDuration = 10f;
-    public float boxAt = 30f;       // BOX BOX button appears at or below this
-    public float autoPitAt = 20f;   // Pit Crew pits automatically at or below this
+    public float boxAt = 30f;
+    public float autoPitAt = 20f;
+
+    public bool autoPit;
     public int crewSize = 1;
     public float baseStopTime = 2f;
     public float perfectStopTime = 0.5f;
     float StopTime => baseStopTime / (1f + 0.5f * (crewSize - 1));
 
-    [HideInInspector] public float tires = 100f; 
+    [HideInInspector] public float tires = 100f;
     float boostTimer;
-    bool pitting;
+    bool pitting;        // stopped in the pit box
+    bool pitCalled;      // heading for the pit lane
 
     void Start()
     {
@@ -42,31 +46,38 @@ public class PitStopManager : MonoBehaviour
             timingBar.value = Mathf.PingPong(Time.time * markerSpeed, 1f);
             return;
         }
-        if (autoPit && tires <= autoPitAt) { AutoPit(); return; }
+        if (autoPit && !pitCalled && tires <= autoPitAt) CallPit(manual: false);
+
         boostTimer -= Time.deltaTime;
         float mult = tires < lowWear ? wornSpeed : 1f;
         if (boostTimer > 0) mult *= boostMultiplier;
         kart.speedMultiplier = mult;
 
-        boxButton.interactable = tires <= boxAt;
+        boxButton.interactable = !pitCalled && tires <= boxAt;
+        if (boxLabel != null) boxLabel.text = pitCalled ? "PIT THIS LAP" : "BOX BOX";
         tireLabel.text = $"Tires {tires:0}%" + (boostTimer > 0 ? "  BOOST!" : "");
     }
 
+    // BOX BOX button
     public void StartPit()
     {
-        pitting = true;
-        kart.paused = true;
-        boxButton.interactable = false; 
-        timingPanel.SetActive(true);
+        if (!pitCalled) CallPit(manual: true);
     }
 
-    void AutoPit()
+    void CallPit(bool manual)
+    {
+        pitCalled = true;
+        pitLane.Request(() => ArriveAtBox(manual));
+    }
+
+    void ArriveAtBox(bool manual)
     {
         pitting = true;
-        kart.paused = true;
-        boxButton.interactable = false;
-        StartCoroutine(FinishPit(StopTime, false));
+        if (manual) timingPanel.SetActive(true);
+        else StartCoroutine(FinishPit(StopTime, false));
     }
+
+    // STOP! button on the timing bar
     public void StopMarker()
     {
         float v = timingBar.value;
@@ -82,5 +93,6 @@ public class PitStopManager : MonoBehaviour
         if (perfect) boostTimer = boostDuration;
         kart.paused = false;
         pitting = false;
+        pitCalled = false;
     }
 }

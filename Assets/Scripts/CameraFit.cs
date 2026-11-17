@@ -5,24 +5,45 @@ using UnityEngine.Splines;
 public class CameraFit : MonoBehaviour
 {
     public SplineContainer track;
-    public float padding = 1f;          // world units around the track
-    public float topUI = 0.15f;         // fraction of screen used by top text
-    public float bottomUI = 0.28f;      // fraction of screen used by buttons
+    public RectTransform topLimit;      // lowest element of the top HUD (TireText)
+    public RectTransform bottomLimit;   // highest element of the bottom UI (BoxButton)
+    public float padding = 0.8f;        // world units of grass around the track
 
-    void Start()
+    int lastW, lastH;
+    readonly Vector3[] corners = new Vector3[4];
+
+    void LateUpdate()
     {
-        var cam = GetComponent<Camera>();
-        var b = new Bounds((Vector3)track.EvaluatePosition(0f), Vector3.zero);
-        for (int i = 1; i <= 100; i++)
-            b.Encapsulate((Vector3)track.EvaluatePosition(i / 100f));
+        if (Screen.width != lastW || Screen.height != lastH) Fit();
+    }
 
-        float usable = 1f - topUI - bottomUI;
-        float sizeForHeight = (b.extents.y + padding) / usable;
-        float sizeForWidth = (b.extents.x + padding) / cam.aspect;
+    void Fit()
+    {
+        lastW = Screen.width;
+        lastH = Screen.height;
+        var cam = GetComponent<Camera>();
+        Canvas.ForceUpdateCanvases();
+
+        // Screen-pixel band between the top HUD and the bottom buttons
+        topLimit.GetWorldCorners(corners);
+        float bandTop = Mathf.Min(corners[0].y, corners[3].y);
+        bottomLimit.GetWorldCorners(corners);
+        float bandBottom = Mathf.Max(corners[1].y, corners[2].y);
+        float bandHeight = Mathf.Max(1f, bandTop - bandBottom);
+        float bandCenter = (bandTop + bandBottom) / 2f;
+
+        // Track bounds in world space
+        var b = new Bounds((Vector3)track.EvaluatePosition(0f), Vector3.zero);
+        for (int i = 1; i <= 200; i++)
+            b.Encapsulate((Vector3)track.EvaluatePosition(i / 200f));
+
+        float H = Screen.height;
+        float sizeForHeight = (b.size.y + 2 * padding) * H / (2f * bandHeight);
+        float sizeForWidth = (b.size.x + 2 * padding) / (2f * cam.aspect);
         cam.orthographicSize = Mathf.Max(sizeForHeight, sizeForWidth);
 
-        float usableCenter = bottomUI + usable / 2f;
-        float offset = (usableCenter - 0.5f) * 2f * cam.orthographicSize;
-        cam.transform.position = new Vector3(b.center.x, b.center.y - offset, cam.transform.position.z);
+        float unitsPerPixel = 2f * cam.orthographicSize / H;
+        float y = b.center.y - (bandCenter - H / 2f) * unitsPerPixel;
+        cam.transform.position = new Vector3(b.center.x, y, cam.transform.position.z);
     }
 }

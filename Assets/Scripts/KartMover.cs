@@ -4,21 +4,25 @@ using UnityEngine.Splines;
 public class KartMover : MonoBehaviour
 {
     public SplineContainer track;
-    public float speed = 2f;          // units per second
+    public float speed = 2f;
     public int laps;
     public float distance;
     public float speedMultiplier = 1f;
     public bool paused;
-    float length;
+    [HideInInspector] public float lateralOffset;    // sideways shift (pit lane)
+    [HideInInspector] public float laneFactor = 1f;  // pit lane speed limit
     public event System.Action OnLapCompleted;
+
+    float length;
+    float lastOffset;
 
     void Start() => length = track.CalculateLength();
 
     void Update()
     {
         if (paused) return;
-        distance += speed * speedMultiplier * Time.deltaTime;
-
+        float step = speed * speedMultiplier * laneFactor * Time.deltaTime;
+        distance += step;
         if (distance >= length)
         {
             distance -= length;
@@ -26,7 +30,13 @@ public class KartMover : MonoBehaviour
             OnLapCompleted?.Invoke();
         }
         float t = distance / length;
-        transform.position = (Vector3)track.EvaluatePosition(t);
-        transform.up = ((Vector3)track.EvaluateTangent(t)).normalized;
+        Vector3 tan = ((Vector3)track.EvaluateTangent(t)).normalized;
+        Vector3 nrm = new Vector3(-tan.y, tan.x, 0f);
+        transform.position = (Vector3)track.EvaluatePosition(t) + nrm * lateralOffset;
+
+        // Angle the kart while it moves sideways into or out of the pit lane
+        float slope = step > 1e-5f ? (lateralOffset - lastOffset) / step : 0f;
+        lastOffset = lateralOffset;
+        transform.up = (tan + nrm * slope).normalized;
     }
 }
