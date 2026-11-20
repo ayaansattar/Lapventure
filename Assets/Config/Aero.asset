@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Aero
   m_EditorClassIdentifier: Assembly-CSharp::DepartmentConfig
   displayName: Aero
-  baseCost: 60
-  costGrowth: 1.16
-  speedPerLevel: 0.05
-  incomePerLevel: 0
-  milestones: 0a0000001900000032000000i
-  milestoneMultiplier: 2
+  baseCost: 2.2
+  costGrowth: 1.075
+  incomePerLevel: 1.4
+  maxLevel: 150
+  stars: 19000000320000006400000096000000i
+  starMultiplier: 2

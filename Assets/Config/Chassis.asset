@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Chassis
   m_EditorClassIdentifier: Assembly-CSharp::DepartmentConfig
   displayName: Chassis
-  baseCost: 15
-  costGrowth: 1.14
-  incomePerLevel: 2
+  baseCost: 3
+  costGrowth: 1.075
+  incomePerLevel: 1.6
   maxLevel: 150
   stars: 19000000320000006400000096000000i
   starMultiplier: 2

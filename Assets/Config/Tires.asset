@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Tires
   m_EditorClassIdentifier: Assembly-CSharp::DepartmentConfig
   displayName: Tires
-  baseCost: 25
-  costGrowth: 1.15
-  speedPerLevel: 0.06
-  incomePerLevel: 0
-  milestones: 0a0000001900000032000000i
-  milestoneMultiplier: 2
+  baseCost: 1.5
+  costGrowth: 1.075
+  incomePerLevel: 1.2
+  maxLevel: 150
+  stars: 19000000320000006400000096000000i
+  starMultiplier: 2

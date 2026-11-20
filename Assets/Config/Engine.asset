@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Engine
   m_EditorClassIdentifier: Assembly-CSharp::DepartmentConfig
   displayName: Engine
-  baseCost: 10
-  costGrowth: 1.15
-  speedPerLevel: 0.08
-  incomePerLevel: 0
-  milestones: 0a0000001900000032000000i
-  milestoneMultiplier: 2
+  baseCost: 1
+  costGrowth: 1.075
+  incomePerLevel: 1
+  maxLevel: 150
+  stars: 19000000320000006400000096000000i
+  starMultiplier: 2

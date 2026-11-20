@@ -15,6 +15,7 @@ public class RaceManager : MonoBehaviour
     public KartMover[] Order { get; private set; }
     public TeamStats stats;
     public float[] rivalPerformance = { 0.3f, 0.55f, 0.8f, 0.995f };
+    public TMP_Text lapLabel;
 
     void Start()
     {
@@ -34,8 +35,8 @@ public class RaceManager : MonoBehaviour
     {
         float p = Progress(player);
         Position = 1 + rivals.Count(r => Progress(r) > p);
-        positionLabel.text = $"P{Position} / {rivals.Length + 1}   Lap {player.laps + 1}";
-
+        positionLabel.text = $"P{Position} / {rivals.Length + 1}";
+        if (lapLabel != null) lapLabel.text = $"Lap {player.laps + 1}";
 
 
         var order = rivals.Append(player).OrderByDescending(Progress).ToArray();

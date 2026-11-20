@@ -27,6 +27,7 @@ public class PitStopManager : MonoBehaviour
     public float baseStopTime = 2f;
     public float perfectStopTime = 0.5f;
     float StopTime => baseStopTime / (1f + 0.5f * (crewSize - 1));
+    public bool Boosting => boostTimer > 0;
 
     [HideInInspector] public float tires = 100f;
     float boostTimer;
@@ -55,7 +56,7 @@ public class PitStopManager : MonoBehaviour
 
         boxButton.interactable = !pitCalled && tires <= boxAt;
         if (boxLabel != null) boxLabel.text = pitCalled ? "PIT THIS LAP" : "BOX BOX";
-        tireLabel.text = $"Tires {tires:0}%" + (boostTimer > 0 ? "  BOOST!" : "");
+        if (tireLabel != null) tireLabel.text = $"Tires {tires:0}%" + (boostTimer > 0 ? "  BOOST!" : "");
     }
 
     // BOX BOX button
