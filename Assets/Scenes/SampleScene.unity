@@ -1138,7 +1138,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -40, y: -30}
+  m_AnchoredPosition: {x: -30, y: -20}
   m_SizeDelta: {x: 120, y: 110}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &43283847
@@ -2767,8 +2767,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 26
+  m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4770,17 +4770,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 743109519}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1076215199}
+  m_Father: {fileID: 1336649283}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 140, y: -135}
-  m_SizeDelta: {x: 320, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 70, y: -28}
+  m_SizeDelta: {x: -70, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &743109521
 MonoBehaviour:
@@ -4850,7 +4850,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6333,7 +6333,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 20}
-  m_SizeDelta: {x: -60, y: 36}
+  m_SizeDelta: {x: -60, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1046222299
 GameObject:
@@ -6398,8 +6398,6 @@ RectTransform:
   m_Children:
   - {fileID: 1336649283}
   - {fileID: 2137749748}
-  - {fileID: 743109520}
-  - {fileID: 1794913680}
   - {fileID: 43283846}
   - {fileID: 1040256516}
   m_Father: {fileID: 2031274210}
@@ -7789,12 +7787,13 @@ RectTransform:
   m_Children:
   - {fileID: 649178157}
   - {fileID: 434865952}
+  - {fileID: 743109520}
   m_Father: {fileID: 1076215199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 70, y: -40}
-  m_SizeDelta: {x: 380, y: 90}
+  m_AnchoredPosition: {x: 80, y: -30}
+  m_SizeDelta: {x: 390, y: 90}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1336649284
 MonoBehaviour:
@@ -8596,17 +8595,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794913679}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1076215199}
+  m_Father: {fileID: 2137749748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 640, y: -135}
-  m_SizeDelta: {x: 320, y: 50}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 70, y: -28}
+  m_SizeDelta: {x: -70, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1794913681
 MonoBehaviour:
@@ -8662,7 +8661,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -9909,12 +9908,13 @@ RectTransform:
   m_Children:
   - {fileID: 610116590}
   - {fileID: 490870711}
+  - {fileID: 1794913680}
   m_Father: {fileID: 1076215199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 560, y: -40}
-  m_SizeDelta: {x: 330, y: 90}
+  m_AnchoredPosition: {x: 580, y: -30}
+  m_SizeDelta: {x: 300, y: 90}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2137749749
 MonoBehaviour:
@@ -10065,6 +10065,7 @@ MonoBehaviour:
   - 0.8
   - 0.995
   lapLabel: {fileID: 1794913681}
+  gridGap: 0.8
 --- !u!114 &2145605920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10172,6 +10173,7 @@ MonoBehaviour:
   maxOfflineHours: 2
   noCrewOfflineRate: 0.4
   teamUpgrades: {fileID: 0}
+  race: {fileID: 2145605919}
 --- !u!114 &2145605924
 MonoBehaviour:
   m_ObjectHideFlags: 0

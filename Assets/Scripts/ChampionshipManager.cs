@@ -34,14 +34,14 @@ public class ChampionshipManager : MonoBehaviour
             if (leadStart < 0) leadStart = PlayerProgress;
             float held = Mathf.Clamp01((PlayerProgress - leadStart) / length);
             progressBar.value = 0.8f + 0.2f * held;
-            goalLabel.text = "Hold the lead for one lap!";
+            goalLabel.text = "Hold P1 for one lap"; 
             if (held >= 1f) Win();
         }
         else
         {
             leadStart = -1f;
             progressBar.value = 0.8f * (karts - race.Position) / (karts - 1);
-            goalLabel.text = $"Overtake to P1 ({race.Position - 1} to pass)";
+            goalLabel.text = $"{race.Position - 1} to pass for P1";
         }
     }
 

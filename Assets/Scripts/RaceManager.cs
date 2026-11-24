@@ -16,6 +16,18 @@ public class RaceManager : MonoBehaviour
     public TeamStats stats;
     public float[] rivalPerformance = { 0.3f, 0.55f, 0.8f, 0.995f };
     public TMP_Text lapLabel;
+    public float gridGap = 0.8f;   // space between karts on the grid
+
+    public void SetupGrid()
+    {
+        player.laps = 0;
+        player.distance = 0f;
+        for (int i = 0; i < rivals.Length; i++)
+        {
+            rivals[i].laps = 0;
+            rivals[i].distance = gridGap * (i + 1);   // fastest rival starts at the front
+        }
+    }
 
     void Start()
     {

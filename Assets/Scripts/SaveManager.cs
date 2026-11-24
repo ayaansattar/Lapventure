@@ -21,6 +21,7 @@ public class SaveManager : MonoBehaviour
     double pendingOffline;
     long pausedAt;
     public TeamUpgradesManager teamUpgrades;
+    public RaceManager race;
 
     void Start()
     {
@@ -63,7 +64,7 @@ public class SaveManager : MonoBehaviour
 
     void Load()
     {
-        if (!File.Exists(SavePath)) return;
+        if (!File.Exists(SavePath)) { race.SetupGrid(); return; }
         var d = JsonUtility.FromJson<SaveData>(File.ReadAllText(SavePath));
         CurrencyManager.Instance.money = d.money;
         payout.Uncollected = d.uncollected;
